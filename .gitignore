@@ -1,0 +1,8 @@
+.idea/
+.vscode
+lscoins-template/vendor/
+lscoins-template/cypress/node_modules/
+lscoins-template/cypress/cypress/tmp/
+/vendor/
+/var/
+.env
