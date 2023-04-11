@@ -19,13 +19,11 @@ $container->set(
         return Twig::create(__DIR__ . '/../templates', ['cache' => false]);
     }
 );
-// TUTORIAL !!
-// https://www.digitalocean.com/community/tutorials/getting-started-with-slim-3-a-php-microframework
 
 $container->set(
     SignInController::class,
     function (ContainerInterface $c) {
-        $controller = new SignInController($c->get("view"));
+        $controller = new SignInController($c->get("view"),$c->get(UserRepository::class));
         return $controller;
     }
 );
@@ -33,7 +31,7 @@ $container->set(
 $container->set(
     SignUpController::class,
     function (ContainerInterface $c) {
-        $controller = new SignUpController($c->get("view"));
+        $controller = new SignUpController($c->get("view"),$c->get(UserRepository::class));
         return $controller;
     }
 );

@@ -6,7 +6,7 @@ namespace Salle\LSCoins\Controller;
 use DateTime;
 use Exception;
 use Salle\LSCoins\Model\User;
-use SallePW\SlimApp\Model\UserRepository;
+use Salle\LSCoins\Model\UserRepository;
 use Slim\Views\Twig;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;

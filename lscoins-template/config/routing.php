@@ -1,20 +1,21 @@
 <?php
 declare(strict_types=1);
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Salle\LSCoins\Controller\CreateUserController;
 use Salle\LSCoins\Controller\HomeController;
 use Salle\LSCoins\Controller\SignInController;
 use Salle\LSCoins\Controller\SignUpController;
 
 
-$app->get('/', HomeController::class . ':apply')->setName('root');
+$app->get('/main', HomeController::class . ':apply')->setName('root');
 
 $app->get(
-    '/login',
+    '/',
     SignInController::class . ":showForm"
 );
 
 $app->post(
-    '/login',
+    '/',
     SignInController::class . ":handleFormSubmission"
 )->setName('handle-form');
 
