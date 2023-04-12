@@ -9,4 +9,6 @@ interface UserRepository
 {
     public function save(User $user): void;
     public function userExists(String $email): bool;
+
+    public function isPasswordOkay($email,$pwd):bool;
 }

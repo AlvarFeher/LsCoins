@@ -4,9 +4,12 @@
 
 {% block content %}
 <h1 data-cy="home__welcomeMsg">LS COINS {{ username }}!</h1>
+    <h2>welcome stranger</h2>
     <ul>
         <li><button name="home">Home</button></li>
         <li><button name="market">Market</button></li>
         <li ><button name="profile">Profile</button></li>
     </ul>
+    <p class="mb-0 mt-4 text-center"><a href="{{ full_url_for('root') }}login" class="link">Please Log In to be able to use the app</a></p>
+    <a href="{{ full_url_for('root') }}login" class="btn mt-4">Launch App</a>
 {% endblock %}

@@ -89,7 +89,7 @@ class SignUpController
 
        if($error == false){
            $this->addUser($email,$password,$coins);
-           $response = $response->withStatus(302)->withHeader('Location', 'sign-in');
+           $response = $response->withStatus(302)->withHeader('Location', '/login');
            return $response;
        }
 

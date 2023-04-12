@@ -35,6 +35,10 @@ class SignInController
         return $this->userRepository->userExists($email);
     }
 
+    private function checkPassword($email,$pwd):bool{
+        return $this->userRepository->isPasswordOkay($email,$pwd);
+    }
+
     public function handleFormSubmission(Request $request, Response $response): Response
     {
         $data = $request->getParsedBody();
@@ -54,7 +58,12 @@ class SignInController
         }
 
         if($error == false){
-            $response = $response->withStatus(302)->withHeader('Location', '/main');
+            if($this->userRepository->isPasswordOkay($email,$password)){
+                $_SESSION['email'] = $email;
+                $response = $response->withStatus(302)->withHeader('Location', '/');
+            }else{
+                $errors['email'] = 'wrong credentials';
+            }
         }
 
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();

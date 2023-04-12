@@ -20,6 +20,6 @@ final class HomeController
     public function apply(Request $request, Response $response)
     {
         session_start();
-        return $this->twig->render($response, 'home.twig');
+        return $this->twig->render($response, 'homescreen.twig');
     }
 }

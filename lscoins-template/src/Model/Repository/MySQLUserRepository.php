@@ -39,16 +39,15 @@ QUERY;
         $statement->execute();
     }
 
-    public function checkCredentialsOkay(String $email, String $pwd): bool{
+    public function isPasswordOkay($email,  $pwd): bool{
         $query = <<<'QUERY'
         SELECT count((users.email)) FROM users WHERE email=:email AND password=:password
         QUERY;
         $statement = $this->database->connection()->prepare($query);
         $statement->bindParam('email', $email, PDO::PARAM_STR);
-        $statement->bindParam('password', $password, PDO::PARAM_STR);
+        $statement->bindParam('password', $pwd, PDO::PARAM_STR);
         $statement->execute();
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-
         $query_result = intval($results[0]["count((users.email))"]);
 
         return ($query_result == 1);
@@ -70,4 +69,6 @@ QUERY;
        $result = $this->getNumUsers($email);
        return $result > 0;
     }
+
+
 }
