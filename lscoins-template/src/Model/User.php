@@ -10,12 +10,14 @@ final class User
     private int $id;
     private string $email;
     private string $password;
+    private int $coins;
     private DateTime $createdAt;
     private DateTime $updatedAt;
 
     public function __construct(
         string $email,
         string $password,
+        int $coins,
         DateTime $createdAt,
         DateTime $updatedAt
     ) {
@@ -23,6 +25,7 @@ final class User
         $this->password = $password;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+        $this->coins = $coins;
     }
 
     public function id(): int
@@ -55,4 +58,10 @@ final class User
     {
         return $this->updatedAt;
     }
+
+    public function coins(): int
+    {
+        return $this->coins;
+    }
+
 }

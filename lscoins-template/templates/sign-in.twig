@@ -21,4 +21,5 @@
     {% if formErrors['password'] %}
         <p data-cy="sign-in__wrongPassword">{{ formErrors['password'] }}</p>
     {% endif %}
+    <p class="mb-0 mt-4 text-center"><a href="{{ full_url_for('root') }}signup" class="link">Do not have an account?</a></p>
 {% endblock %}

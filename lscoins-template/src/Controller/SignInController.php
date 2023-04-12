@@ -38,15 +38,23 @@ class SignInController
     public function handleFormSubmission(Request $request, Response $response): Response
     {
         $data = $request->getParsedBody();
-
+        $email = $_POST['email'];
+        $password = $_POST['password'];
         $errors = [];
+        $error = false;
 
-        if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'The email address is not valid';
+            $error = true;
         }
 
-        if(!$this->userExists($data['email'])){
+        if(!$this->userExists($email)){
             $errors['email'] = 'The user does not exist';
+            $error = true;
+        }
+
+        if($error == false){
+            $response = $response->withStatus(302)->withHeader('Location', '/main');
         }
 
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();

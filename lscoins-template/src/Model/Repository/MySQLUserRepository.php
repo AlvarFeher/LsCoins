@@ -21,8 +21,8 @@ final class MySQLUserRepository implements UserRepository
     public function save(User $user): void
     {
         $query = <<<'QUERY'
-        INSERT INTO user(email, password, created_at, updated_at)
-        VALUES(:email, :password, :created_at, :updated_at)
+        INSERT INTO users(email, password, createdAt, updatedAt, coins)
+        VALUES(:email, :password, :createdAt, :updatedAt, :coins)
 QUERY;
         $statement = $this->database->connection()->prepare($query);
 
@@ -30,12 +30,12 @@ QUERY;
         $password = $user->password();
         $createdAt = $user->createdAt()->format(self::DATE_FORMAT);
         $updatedAt = $user->updatedAt()->format(self::DATE_FORMAT);
-
+        $coins = $user->coins();
         $statement->bindParam('email', $email, PDO::PARAM_STR);
         $statement->bindParam('password', $password, PDO::PARAM_STR);
-        $statement->bindParam('created_at', $createdAt, PDO::PARAM_STR);
-        $statement->bindParam('updated_at', $updatedAt, PDO::PARAM_STR);
-
+        $statement->bindParam('createdAt', $createdAt, PDO::PARAM_STR);
+        $statement->bindParam('updatedAt', $updatedAt, PDO::PARAM_STR);
+        $statement->bindParam('coins',$coins,PDO::PARAM_INT);
         $statement->execute();
     }
 
@@ -62,7 +62,6 @@ QUERY;
         $statement->bindParam('email', $email, PDO::PARAM_STR);
         $statement->execute();
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-
         return intval($results[0]["count((users.email))"]);
     }
 

@@ -30,9 +30,12 @@ final class CreateUserController
             $data = $request->getParsedBody();
 
             // TODO - Validate data before instantiating the user
+
+
             $user = new User(
                 $data['email'] ?? '',
                 $data['password'] ?? '',
+                $data['coins'],
                 new DateTime(),
                 new DateTime()
             );
