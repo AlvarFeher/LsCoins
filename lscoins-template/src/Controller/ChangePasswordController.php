@@ -6,10 +6,9 @@ use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 
-class ProfileController
+class ChangePasswordController
 {
     private Twig $twig;
-
 
     public function __construct(Twig $twig)
     {
@@ -18,10 +17,6 @@ class ProfileController
 
     public function apply(Request $request, Response $response)
     {
-        if(!empty($_GET['pwdChange'])){
-            header('Location: /pwd-change');
-            exit;
-        }
-        return $this->twig->render($response, 'profile.twig');
+        return $this->twig->render($response, 'market.twig');
     }
 }

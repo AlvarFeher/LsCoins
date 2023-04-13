@@ -48,12 +48,12 @@ class SignInController
         $error = false;
 
         if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = 'The email address is not valid';
+            $errors['email'] = 'The email address is not valid.';
             $error = true;
         }
 
         if(!$this->userExists($email)){
-            $errors['email'] = 'The user does not exist';
+            $errors['email'] = 'User with this email address does not exist.';
             $error = true;
         }
 
@@ -63,7 +63,7 @@ class SignInController
                 $_SESSION['email'] = $email;
                 $response = $response->withStatus(302)->withHeader('Location', '/');
             }else{
-                $errors['email'] = 'wrong credentials';
+                $errors['email'] = 'Your email and/or password are incorrect.';
             }
         }
 

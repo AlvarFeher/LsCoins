@@ -34,25 +34,25 @@ class SignUpController
             if(strcmp($domain,"salle.url.edu" )==0){
                 return 'true';
             }else{
-                return 'only emails from the domain @salle.url.edu are valid';
+                return 'Only emails from the domain @salle.url.edu are accepted.';
             }
         }else{
-            return 'The email address is not valid';
+            return 'The email address is not valid.';
         }
     }
 
     public function validatePassword($pwd,$repeatPwd):String{
         if(strcmp($pwd,$repeatPwd) != 0){
-            return "passwords are not the same";
+            return "Passwords do not match.";
         }
         if(strlen($pwd) < 5){
-            return "password must be at least 6 characters long";
+            return "The password must contain at least 7 characters.";
         }
         if (!(strtolower($pwd) != $pwd && strtoupper($pwd) !=$pwd)) {
-            return 'The password must contain both upper and lower case letters and numbers';
+            return 'The password must contain both upper and lower case letters and numbers.';
         }
         if (!preg_match('~[0-9]+~', $pwd)) {
-            return "The password must contain both upper and lower case letters and numbers";
+            return "The password must contain both upper and lower case letters and numbers.";
         }
         return "null";
     }
@@ -85,7 +85,7 @@ class SignUpController
         }
 
         if($this->userRepository->userExists($email)){
-            $errors['email'] = "This email is already in use";
+            $errors['email'] = "The email address is not valid.";
             $error = true;
         }
 

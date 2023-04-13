@@ -10,23 +10,24 @@
         <input data-cy="sign-up__email" type="text" name="email" placeholder="Enter your email"
                value="{{ formData.email }}">
         {% if formErrors['email'] %}
-            <p data-cy="sign-up__wrongEmail">{{ formErrors['email'] }}</p>
+            <span data-cy="sign-up__wrongEmail">{{ formErrors['email'] }}</span>
         {% endif %}
 
         <label> Password </label>
         <input data-cy="sign-up__password" type="password" name="password" placeholder="Enter your password">
+
         <label> Repeat Password </label>
         <input data-cy="sign-up__repeatPassword" type="password" name="repeatPassword"
                placeholder="Repeat your password">
         {% if formErrors['password'] %}
-            <p data-cy="sign-up__wrongPassword">{{ formErrors['password'] }}</p>
+            <span data-cy="sign-up__wrongPassword">{{ formErrors['password'] }}</span>
         {% endif %}
 
         <label> LSCoins to deposit </label>
         <input data-cy="sign-up__coins" type="text" name="coins"
                value="{{ formData.coins }}"/>
         {% if formErrors['coins'] %}
-            <p data-cy="sign-up__wrongCoins">{{ formErrors['coins'] }}</p>
+            <span data-cy="sign-up__wrongCoins">{{ formErrors['coins'] }}</span>
         {% endif %}
 
         <input data-cy="sign-up__btn" type="submit" value="Sign-up">
