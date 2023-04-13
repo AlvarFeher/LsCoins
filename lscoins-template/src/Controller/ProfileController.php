@@ -6,9 +6,10 @@ use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 
-class MarketController
+class ProfileController
 {
     private Twig $twig;
+
 
     public function __construct(Twig $twig)
     {
@@ -17,6 +18,6 @@ class MarketController
 
     public function apply(Request $request, Response $response)
     {
-        return $this->twig->render($response, 'market.twig');
+        return $this->twig->render($response, 'profile.twig');
     }
 }

@@ -11,7 +11,6 @@ final class HomeController
 {
     private Twig $twig;
 
-    // You can also use https://stitcher.io/blog/constructor-promotion-in-php-8
     public function __construct(Twig $twig)
     {
         $this->twig = $twig;
@@ -20,6 +19,9 @@ final class HomeController
     public function apply(Request $request, Response $response)
     {
         session_start();
+        $email =  $_SESSION['email'];
+        $username = explode('@',$email);
+
         if(!empty($_GET['logoutButton'])){
             session_destroy();
             header('Location: /sign-in');
@@ -29,6 +31,10 @@ final class HomeController
             header('Location: /market');
             exit;
         }
-        return $this->twig->render($response, 'homescreen.twig');
+        if(!empty($_GET['profile'])){
+            header('Location: /profile');
+            exit;
+        }
+        return $this->twig->render($response, 'homescreen.twig',['email' =>$username[0]]);
     }
 }

@@ -6,6 +6,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Salle\LSCoins\Controller\CreateUserController;
 use Salle\LSCoins\Controller\HomeController;
 use Salle\LSCoins\Controller\MarketController;
+use Salle\LSCoins\Controller\ProfileController;
 use Salle\LSCoins\Controller\SignInController;
 use Salle\LSCoins\Controller\SignUpController;
 
@@ -19,6 +20,9 @@ $app->post('/sign-up', SignUpController::class . ":handleFormSubmission")->setNa
 
 $app->get('/market', MarketController::class . ":apply");
 $app->post('/market', MarketController::class . ":handleFormSubmission")->setName('handle-form');
+
+$app->get('/profile', ProfileController::class . ":apply");
+$app->post('/profile', MarketController::class . ":handleFormSubmission")->setName('handle-form');
 
 $app->get('/home', function (Request $request, Response $response) {return $this->get('view')->render($response, 'home.twig', []);})->setName('/home');
 

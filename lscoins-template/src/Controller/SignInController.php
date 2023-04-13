@@ -59,6 +59,7 @@ class SignInController
 
         if($error == false){
             if($this->userRepository->isPasswordOkay($email,$password)){
+                session_start();
                 $_SESSION['email'] = $email;
                 $response = $response->withStatus(302)->withHeader('Location', '/');
             }else{

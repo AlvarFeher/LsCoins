@@ -4,13 +4,11 @@
 
 {% block content %}
     <h1 data-cy="home__welcomeMsg">LS COINS {{ username }}!</h1>
-    <h2>welcome user</h2>
+    <h2>welcome {{ email }}</h2>
         <form  method="GET" accept-charset="utf-8">
             <button type="submit" value="set" name="home">Home</button>
             <button type="submit" value="set" name="market">Market</button>
             <button type="submit" value="set" name="profile">Profile</button>
             <button type="submit" value="set" name="logoutButton">Log Out</button>
         </form>
-
-
 {% endblock %}
