@@ -84,12 +84,18 @@ class SignUpController
             $error = true;
         }
 
+        if($this->userRepository->userExists($email)){
+            $errors['email'] = "This email is already in use";
+            $error = true;
+        }
+
        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-       var_dump($data['email']);
+       //var_dump($data['email']);
 
        if($error == false){
            $this->addUser($email,$password,$coins);
-           $response = $response->withStatus(302)->withHeader('Location', '/login');
+           //header('Location: /sign-in');
+           $response = $response->withStatus(302)->withHeader('Location', '/sign-in');
            return $response;
        }
 

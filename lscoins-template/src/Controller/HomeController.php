@@ -20,6 +20,15 @@ final class HomeController
     public function apply(Request $request, Response $response)
     {
         session_start();
+        if(!empty($_GET['logoutButton'])){
+            session_destroy();
+            header('Location: /sign-in');
+            exit;
+        }
+        if(!empty($_GET['market'])){
+            header('Location: /market');
+            exit;
+        }
         return $this->twig->render($response, 'homescreen.twig');
     }
 }

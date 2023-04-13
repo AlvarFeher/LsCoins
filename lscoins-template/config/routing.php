@@ -11,13 +11,13 @@ use Salle\LSCoins\Controller\SignUpController;
 
 $app->get('/', HomeController::class . ':apply')->setName('root');
 
-$app->get('/login', SignInController::class . ":showForm");
-$app->post('/login', SignInController::class . ":handleFormSubmission")->setName('handle-form');
+$app->get('/sign-in', SignInController::class . ":showForm");
+$app->post('/sign-in', SignInController::class . ":handleFormSubmission")->setName('handle-form');
 
-$app->get('/signup', SignUpController::class . ":showForm");
-$app->post('/signup', SignUpController::class . ":handleFormSubmission")->setName('handle-form');
+$app->get('/sign-up', SignUpController::class . ":showForm");
+$app->post('/sign-up', SignUpController::class . ":handleFormSubmission")->setName('handle-form');
 
-$app->get('/market', MarketController::class . ":showForm");
+$app->get('/market', MarketController::class . ":apply");
 $app->post('/market', MarketController::class . ":handleFormSubmission")->setName('handle-form');
 
 $app->get('/home', function (Request $request, Response $response) {return $this->get('view')->render($response, 'home.twig', []);})->setName('/home');

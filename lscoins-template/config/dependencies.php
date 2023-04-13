@@ -1,6 +1,7 @@
 <?php
 
 use Salle\LSCoins\Controller\CreateUserController;
+use Salle\LSCoins\Controller\MarketController;
 use Salle\LSCoins\Controller\SignInController;
 use Salle\LSCoins\Controller\SignUpController;
 use DI\Container;
@@ -32,6 +33,14 @@ $container->set(
     SignUpController::class,
     function (ContainerInterface $c) {
         $controller = new SignUpController($c->get("view"),$c->get(UserRepository::class));
+        return $controller;
+    }
+);
+
+$container->set(
+    MarketController::class,
+    function (ContainerInterface $c) {
+        $controller = new MarketController($c->get("view"),$c->get(UserRepository::class));
         return $controller;
     }
 );
