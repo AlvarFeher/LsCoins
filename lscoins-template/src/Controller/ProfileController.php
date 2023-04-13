@@ -19,7 +19,7 @@ class ProfileController
     public function apply(Request $request, Response $response)
     {
         if(!empty($_GET['pwdChange'])){
-            header('Location: /pwd-change');
+            header('Location: /changePassword');
             exit;
         }
         return $this->twig->render($response, 'profile.twig');

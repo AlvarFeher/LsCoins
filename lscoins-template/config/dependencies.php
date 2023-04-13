@@ -1,5 +1,6 @@
 <?php
 
+use Salle\LSCoins\Controller\ChangePasswordController;
 use Salle\LSCoins\Controller\CreateUserController;
 use Salle\LSCoins\Controller\MarketController;
 use Salle\LSCoins\Controller\ProfileController;
@@ -42,6 +43,14 @@ $container->set(
     ProfileController::class,
     function (ContainerInterface $c) {
         $controller = new ProfileController($c->get("view"),$c->get(UserRepository::class));
+        return $controller;
+    }
+);
+
+$container->set(
+    ChangePasswordController::class,
+    function (ContainerInterface $c) {
+        $controller = new ChangePasswordController($c->get("view"),$c->get(UserRepository::class));
         return $controller;
     }
 );

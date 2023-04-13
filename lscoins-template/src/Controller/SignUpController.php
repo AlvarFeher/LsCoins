@@ -28,6 +28,17 @@ class SignUpController
        // );
     }
 
+    public function validateCoins($coins):String{
+        if ((intval($coins) < 50 || intval($coins) > 30000) && is_numeric($coins)){
+            return 'Sorry, the number of LSCoins is either below or above the limits.';
+        }
+        if(!is_numeric($coins) || !is_int(intval($coins)) || $coins == null){
+            return 'The number of LSCoins is not a valid number.';
+        }else{
+            return '';
+        }
+    }
+
     public function validateEmail($email):String{
         if (!empty($email) || filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $domain = substr(strrchr($email, "@"), 1);
@@ -86,6 +97,12 @@ class SignUpController
 
         if($this->userRepository->userExists($email)){
             $errors['email'] = "The email address is not valid.";
+            $error = true;
+        }
+
+        $message = $this->validateCoins($coins);
+        if(strcmp($message,"error")){
+            $errors['coins'] = $message;
             $error = true;
         }
 

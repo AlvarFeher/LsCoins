@@ -24,7 +24,7 @@
         {% endif %}
 
         <label> LSCoins to deposit </label>
-        <input data-cy="sign-up__coins" type="text" name="coins"
+        <input data-cy="sign-up__coins" type="int" name="coins"
                value="{{ formData.coins }}"/>
         {% if formErrors['coins'] %}
             <span data-cy="sign-up__wrongCoins">{{ formErrors['coins'] }}</span>

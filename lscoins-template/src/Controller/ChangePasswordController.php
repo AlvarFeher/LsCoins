@@ -17,6 +17,6 @@ class ChangePasswordController
 
     public function apply(Request $request, Response $response)
     {
-        return $this->twig->render($response, 'market.twig');
+        return $this->twig->render($response, 'changePassword.twig');
     }
 }

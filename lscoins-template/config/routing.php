@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Salle\LSCoins\Controller\ChangePasswordController;
 use Salle\LSCoins\Controller\CreateUserController;
 use Salle\LSCoins\Controller\HomeController;
 use Salle\LSCoins\Controller\MarketController;
@@ -22,7 +23,10 @@ $app->get('/market', MarketController::class . ":apply");
 $app->post('/market', MarketController::class . ":handleFormSubmission")->setName('handle-form');
 
 $app->get('/profile', ProfileController::class . ":apply");
-$app->post('/profile', MarketController::class . ":handleFormSubmission")->setName('handle-form');
+$app->post('/profile', ProfileController::class . ":apply")->setName('handle-form');
+
+$app->get('/changePassword', ChangePasswordController::class . ":apply");
+//$app->post('/changePassword', ChaController::class . ":handleFormSubmission")->setName('handle-form');
 
 $app->get('/home', function (Request $request, Response $response) {return $this->get('view')->render($response, 'home.twig', []);})->setName('/home');
 

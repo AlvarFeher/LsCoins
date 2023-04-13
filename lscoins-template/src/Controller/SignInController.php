@@ -35,8 +35,19 @@ class SignInController
         return $this->userRepository->userExists($email);
     }
 
-    private function checkPassword($email,$pwd):bool{
-        return $this->userRepository->isPasswordOkay($email,$pwd);
+
+    public function validatePassword($pwd):String{
+
+        if(strlen($pwd) < 5){
+            return "The password must contain at least 7 characters.";
+        }
+        if (!(strtolower($pwd) != $pwd && strtoupper($pwd) !=$pwd)) {
+            return 'The password must contain both upper and lower case letters and numbers.';
+        }
+        if (!preg_match('~[0-9]+~', $pwd)) {
+            return "The password must contain both upper and lower case letters and numbers.";
+        }
+        return "null";
     }
 
     public function handleFormSubmission(Request $request, Response $response): Response
@@ -46,6 +57,8 @@ class SignInController
         $password = $_POST['password'];
         $errors = [];
         $error = false;
+        $errors['password'] = $this->validatePassword($password);
+
 
         if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'The email address is not valid.';
@@ -57,8 +70,21 @@ class SignInController
             $error = true;
         }
 
+        if(!str_contains($email,"@")){
+            $errors['email'] = 'The email address is not valid.';
+            $error = true;
+        }
+
+        if(!empty($email) || filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $domain = substr(strrchr($email, "@"), 1);
+            if(!strcmp($domain,"salle.url.edu" )==0){
+                $errors['email'] = 'Only emails from the domain @salle.url.edu are accepted.';
+                $error = true;
+            }
+        }
+        var_dump($error);
         if($error == false){
-            if($this->userRepository->isPasswordOkay($email,$password)){
+            if($this->userRepository->isPasswordOkay($email,$password) && $this->validatePassword($password) == 'null'){
                 session_start();
                 $_SESSION['email'] = $email;
                 $response = $response->withStatus(302)->withHeader('Location', '/');
